@@ -1,0 +1,224 @@
+
+
+
+
+Network Working Group                          K. Nanayakkara Rathnayake
+Internet-Draft                                   IETF Administration LLC
+Intended status: Experimental                           28 February 2025
+Expires: 1 September 2025
+
+
+                        xml2rfc svg limitations
+                  draft-rathnayake-svg-limitations-00
+
+Abstract
+
+   This is a draft explores limits of SVG artwork in xml2rfc.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 1 September 2025.
+
+Copyright Notice
+
+   Copyright (c) 2025 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  SVG without figure caption  . . . . . . . . . . . . . . . . .   2
+   3.  SVG with figure caption . . . . . . . . . . . . . . . . . . .   2
+   4.  Testing PDF output  . . . . . . . . . . . . . . . . . . . . .   3
+   5.  Informative References  . . . . . . . . . . . . . . . . . . .   3
+
+
+
+Rathnayake              Expires 1 September 2025                [Page 1]
+
+Internet-Draft                 svg-limits                  February 2025
+
+
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
+
+1.  Introduction
+
+   This draft explores limits of SVG artwork in [xml2rfc].  Text output
+   of Internet-Drafts (I-Ds) and RFCs doesn't embed SVG artwork.  Only
+   HTML and PDF formats embed SVG artwork.  Between those two formats,
+   PDF is the deciding factor.  This is because of the limitations of
+   the PDF rendering capabilities of [xml2rfc] tool.
+
+   Note that PDF output will contain lot of empty spaces, this is on
+   purpose to maximize the use of A4 size PDF page.
+
+   PDF of rendering of this draft is available here
+   (https://github.com/kesara/xml2rfc-svg-limitations/raw/main/draft-
+   rathnayake-svg-limitations-00.pdf).
+
+2.  SVG without figure caption
+
+   This is an example of <artwork> without a <figure> element to add a
+   caption.
+
+   The example is generated with following XML.
+
+   <artwork type="svg" name="max box">
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+       <rect x="0" y="0" width="900" height="1200" stroke="black"
+         stroke-width="10" fill="none" />
+     </svg>
+   </artwork>
+
+                   +--------+---------+----------------+
+                   | Width  | Height  | viewBox Value  |
+                   +--------+---------+----------------+
+                   | 900 px | 1200 px | "0 0 900 1200" |
+                   +--------+---------+----------------+
+
+                                  Table 1
+
+   (Artwork only available as SVG: see https://www.ietf.org/archive/id/
+   draft-rathnayake-svg-limitations-00.html)
+
+3.  SVG with figure caption
+
+   This is an example of <artwork> with a <figure> element to add a
+   caption.
+
+
+
+
+
+Rathnayake              Expires 1 September 2025                [Page 2]
+
+Internet-Draft                 svg-limits                  February 2025
+
+
+   Note that the caption of the figure fits in to a single line in PDF
+   format.  If the caption runs longer than a one line, adjust the
+   height of SVG artwork accordingly.
+
+   The example is generated with following XML.
+
+   <figure>
+     <name>SVG artwork with the caption</name>
+     <artwork type="svg" name="max box">
+       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1140">
+         <rect x="0" y="0" width="900" height="1140" stroke="black"
+           stroke-width="10" fill="none" />
+       </svg>
+     </artwork>
+   </figure>
+
+                   +--------+---------+----------------+
+                   | Width  | Height  | viewBox Value  |
+                   +--------+---------+----------------+
+                   | 900 px | 1140 px | "0 0 900 1140" |
+                   +--------+---------+----------------+
+
+                                  Table 2
+
+   (Artwork only available as SVG: see https://www.ietf.org/archive/id/
+   draft-rathnayake-svg-limitations-00.html)
+
+                   Figure 1: SVG artwork with the caption
+
+4.  Testing PDF output
+
+   The PDF files available in datatracker (https://datatracker.ietf.org)
+   are different from PDF files published by RFC editor (https://rfc-
+   editor.org) for published RFCs.  The correct PDF output for RFC must
+   be produced with [xml2rfc].
+
+   The PDF output of the I-Ds can be tested using [xml2rfc] with --pdf
+   switch.
+
+   Other option is to use [author-tools].  Use of of Author Tools for
+   this is recommended because Author Tools contains the latest versions
+   of all the tools and libraries and the required fonts
+
+5.  Informative References
+
+   [xml2rfc]  IETF, "xml2rfc", 28 February 2025,
+              <https://github.com/ietf-tools/xml2rfc/>.
+
+
+
+
+Rathnayake              Expires 1 September 2025                [Page 3]
+
+Internet-Draft                 svg-limits                  February 2025
+
+
+   [author-tools]
+              IETF, "Author Tools", 28 February 2025,
+              <https://author-tools.ietf.org>.
+
+Author's Address
+
+   Kesara Nanayakkara Rathnayake
+   IETF Administration LLC
+   New Zealand
+   Email: kesara@fq.nz
+
+   Additional contact information:
+
+      කෙසර නානායක්කාර රත්නායක
+      IETF Administration LLC
+      New Zealand
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Rathnayake              Expires 1 September 2025                [Page 4]
