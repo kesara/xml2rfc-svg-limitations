@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rfc ipr="trust200902" docName="draft-rathnayake-svg-limitations-00"  category="exp" submissionType= "independent" version="3">
+  <front>
+    <title abbrev="svg-limits">xml2rfc svg limitations</title>
+
+    <author initials="K." surname="Nanayakkara Rathnayake" asciiFullname="Kesara Nanayakkara Rathnayake" fullname="&#3482;&#3545;&#3523;&#3515; &#3505;&#3535;&#3505;&#3535;&#3514;&#3482;&#3530;&#3482;&#3535;&#3515; &#3515;&#3501;&#3530;&#3505;&#3535;&#3514;&#3482;">
+      <organization>IETF Administration LLC</organization>
+      <address>
+        <postal>
+          <country>New Zealand</country>
+        </postal>
+        <email>kesara@fq.nz</email>
+      </address>
+    </author>
+
+    <date year="2025" month="February" day="28"/>
+
+    <abstract>
+      <t>This is a draft explores limits of SVG artwork in xml2rfc.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="introduction" title="Introduction">
+      <t>This draft explores limits of SVG artwork in <xref target="xml2rfc" />.
+      Text output of Internet-Drafts (I-Ds) and RFCs doesn't embed SVG artwork.
+      Only HTML and PDF formats embed SVG artwork. Between those two formats, PDF is the deciding factor.
+      This is because of the limitations of the PDF rendering capabilities of <xref target="xml2rfc" /> tool.</t>
+      <t>Note that PDF output will contain lot of empty spaces, this is on purpose to maximize the use of A4 size PDF page.</t>
+      <t>PDF of rendering of this draft is available <eref target="https://github.com/kesara/xml2rfc-svg-limitations/raw/main/draft-rathnayake-svg-limitations-00.pdf">
+      here</eref>.</t>
+    </section>
+
+    <section title="SVG without figure caption">
+      <t>This is an example of <tt>&lt;artwork&gt;</tt> without a <tt>&lt;figure&gt;</tt> element to add a caption.</t>
+      <t>The example is generated with following XML.</t>
+      <sourcecode type="xml">
+<![CDATA[<artwork type="svg" name="max box">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+    <rect x="0" y="0" width="900" height="1200" stroke="black"
+      stroke-width="10" fill="none" />
+  </svg>
+</artwork>]]></sourcecode>
+      <table>
+        <tbody>
+          <tr>
+            <td>Width</td>
+            <td>Height</td>
+            <td><tt>viewBox</tt> Value</td>
+          </tr>
+          <tr>
+            <td><tt>900 px</tt></td>
+            <td><tt>1200 px</tt></td>
+            <td><tt>"0 0 900 1200"</tt></td>
+          </tr>
+        </tbody>
+      </table>
+      <artwork type="svg" name="max box">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+          <rect x="0" y="0" width="900" height="1200" stroke="black" stroke-width="10" fill="none" />
+        </svg>
+      </artwork>
+    </section>
+
+    <section title="SVG with figure caption">
+      <t>This is an example of <tt>&lt;artwork&gt;</tt> with a <tt>&lt;figure&gt;</tt> element to add a caption.</t>
+      <t>Note that the caption of the figure fits in to a single line in PDF format.
+      If the caption runs longer than a one line, adjust the height of SVG artwork accordingly.</t>
+      <t>The example is generated with following XML.</t>
+      <sourcecode type="xml">
+<![CDATA[<figure>
+  <name>SVG artwork with the caption</name>
+  <artwork type="svg" name="max box">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1140">
+      <rect x="0" y="0" width="900" height="1140" stroke="black"
+        stroke-width="10" fill="none" />
+    </svg>
+  </artwork>
+</figure>]]></sourcecode>
+      <table>
+        <tbody>
+          <tr>
+            <td>Width</td>
+            <td>Height</td>
+            <td><tt>viewBox</tt> Value</td>
+          </tr>
+          <tr>
+            <td><tt>900 px</tt></td>
+            <td><tt>1140 px</tt></td>
+            <td><tt>"0 0 900 1140"</tt></td>
+          </tr>
+        </tbody>
+      </table>
+      <figure>
+        <name>SVG artwork with the caption</name>
+        <artwork type="svg" name="max box">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1140">
+            <rect x="0" y="0" width="900" height="1140" stroke="black" stroke-width="10" fill="none" />
+          </svg>
+        </artwork>
+      </figure>
+    </section>
+    <section title="Testing PDF output">
+      <t>The PDF files available in <eref target="https://datatracker.ietf.org">datatracker</eref> are
+      different from PDF files published by <eref target="https://rfc-editor.org">RFC editor</eref> for
+      published RFCs.
+      The correct PDF output for RFC must be produced with <xref target="xml2rfc" />.</t>
+      <t>The PDF output of the I-Ds can be tested using <xref target="xml2rfc" /> with <tt>--pdf</tt> switch.</t>
+      <t>Other option is to use <xref target="author-tools" />.
+      Use of of Author Tools for this is recommended because Author Tools contains the latest versions of all
+      the tools and libraries and the required fonts</t>
+    </section>
+  </middle>
+
+  <back>
+    <references>
+      <name>Informative References</name>
+      <reference anchor="xml2rfc" target="https://github.com/ietf-tools/xml2rfc/">
+        <front>
+          <title>xml2rfc</title>
+          <author>
+            <organization>IETF</organization>
+          </author>
+          <date month="February" day="28" year="2025"/>
+        </front>
+      </reference>
+      <reference anchor="author-tools" target="https://author-tools.ietf.org">
+        <front>
+          <title>Author Tools</title>
+          <author>
+            <organization>IETF</organization>
+          </author>
+          <date month="February" day="28" year="2025"/>
+        </front>
+      </reference>
+    </references>
+  </back>
+</rfc>
